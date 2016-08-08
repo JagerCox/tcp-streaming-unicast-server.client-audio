@@ -50,5 +50,6 @@ if __name__ == '__main__':
         connection.recv(SIZE)
 
     connection.close()
+    stream.stop_stream()
     stream.close()
     p.terminate()
