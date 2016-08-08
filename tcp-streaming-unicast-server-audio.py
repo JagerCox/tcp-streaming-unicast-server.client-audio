@@ -42,14 +42,14 @@ if __name__ == '__main__':
     connection.bind((HOST, PORT))
     connection.listen(BACKLOG)
 
-    server, address = connection.accept()
+    conn, address = connection.accept()
 
     while True:
-        data = server.recv(SIZE)
+        data = conn.recv(SIZE)
         if data:
             stream.write(data)
 
-    server.close()
+    conn.close()
     stream.stop_stream()
     stream.close()
     p.terminate()
