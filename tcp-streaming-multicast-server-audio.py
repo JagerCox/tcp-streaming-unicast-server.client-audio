@@ -45,14 +45,15 @@ if __name__ == '__main__':
     connection.bind((HOST, PORT))
     connection.listen(BACKLOG)
 
-    client, address = connection.accept()
+    server, address = connection.accept()
 
     while True:
-        data = client.recv(SIZE)
+        data = server.recv(SIZE)
         if data:
             stream.write(data)  # Stream to send
-            client.send('ACK')  # Send an ACK
+            # client.send('ACK')  # Not necessary
 
-    client.close()
+    server.close()
+    stream.stop_stream()
     stream.close()
     p.terminate()
