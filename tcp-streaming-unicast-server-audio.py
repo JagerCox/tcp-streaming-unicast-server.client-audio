@@ -33,14 +33,11 @@ BACKLOG = 5
 SIZE = 1024
 
 if __name__ == '__main__':
-    '''PyAudio initialization'''
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT,
                     channels=CHANNELS,
                     rate=RATE,
                     output=OUTPUT)
-
-    '''Socket server initialization'''
     connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     connection.bind((HOST, PORT))
     connection.listen(BACKLOG)
@@ -50,8 +47,7 @@ if __name__ == '__main__':
     while True:
         data = server.recv(SIZE)
         if data:
-            stream.write(data)  # Stream to send
-            # client.send('ACK')  # Not necessary
+            stream.write(data)
 
     server.close()
     stream.stop_stream()
